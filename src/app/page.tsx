@@ -31,9 +31,7 @@ export default function HomePage() {
   const [receiptId, setReceiptId] = useState("");
   const [showData, setShowData] = useState<Product[]>(data);
   const [errorMessage, setErrorMessage] = useState("");
-  const [newData, setNewData] = useState<
-  { productName: string; price: number; quantity: number }[]
->([]);
+
   const categoryItems = [
     { key: "book", category: "Books", image: "/images/books.png" },
     {
@@ -91,34 +89,47 @@ export default function HomePage() {
       setShowData(data);
     }
   }, [data, filteredData.length, searchProductsByName]);
-  useEffect(() => {
-  const updatedNewData = data.reduce(
-    (acc, item) => {
+  //   useEffect(() => {
+  //   const updatedNewData = data.reduce(
+  //     (acc, item) => {
+  //       const quantity = counts[item.id] || 0;
+  //       if (quantity > 0) {
+  //         acc.push({
+  //           productName: item.productName,
+  //           price: item.price,
+  //           quantity,
+  //         });
+  //       }
+  //       return acc;
+  //     },
+  //     [] as { productName: string; price: number; quantity: number }[]
+  //   );
+  //   setNewData(updatedNewData);
+
+  // }, [counts, data]);
+  const newData = data.reduce(
+    (acc: { productName: string; price: number; quantity: number }[], item) => {
       const quantity = counts[item.id] || 0;
       if (quantity > 0) {
         acc.push({
           productName: item.productName,
           price: item.price,
-          quantity,
+          quantity: quantity,
         });
       }
       return acc;
     },
-    [] as { productName: string; price: number; quantity: number }[]
+    []
   );
-  setNewData(updatedNewData);
-
-}, [counts, data]);
-
-useEffect(() => {
-  setCounts(prevCounts => {
-    const newCounts: Record<string, number> = {};
-    data.forEach(item => {
-      newCounts[item.id] = prevCounts[item.id] || 0;
+  useEffect(() => {
+    setCounts((prevCounts) => {
+      const newCounts: Record<string, number> = {};
+      data.forEach((item) => {
+        newCounts[item.id] = prevCounts[item.id] || 0;
+      });
+      return newCounts;
     });
-    return newCounts;
-  });
-}, [data]);
+  }, [data]);
 
   const handleDecrement = (id: string) => {
     setCounts((prevCounts) => {
@@ -267,7 +278,7 @@ useEffect(() => {
               ))
             : "Not Found"}
         </div>
-        {Object.keys(counts).length > 0 && (
+        {newData.length > 0 && (
           <CartSummaryBar
             totalPrice={calculateTotalPrices()}
             onCreateOrder={() => setOpenModal(true)}

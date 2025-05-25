@@ -15,11 +15,36 @@
     ]
   },
   {
-    "id": "1234",
+    "id": "ทดสอบ2",
     "products": [
       {
-        "productName": "Pen",
-        "price": 15,
+        "productName": "Foreign Novel",
+        "price": 300,
+        "quantity": 1
+      },
+      {
+        "productName": "Comic Book",
+        "price": 150,
+        "quantity": 10
+      },
+      {
+        "productName": "Mechanical Pencil",
+        "price": 40,
+        "quantity": 1
+      },
+      {
+        "productName": "Crayons",
+        "price": 60,
+        "quantity": 1
+      },
+      {
+        "productName": "Pencil Case",
+        "price": 100,
+        "quantity": 1
+      },
+      {
+        "productName": "Keychain",
+        "price": 30,
         "quantity": 1
       }
     ]
