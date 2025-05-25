@@ -62,7 +62,7 @@ export default function EditReceipt() {
   }, [id]);
 
   const updateReceipt = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // ✅ ป้องกัน reload
+    e.preventDefault();
     if (!receipt) return;
 
     setSubmitting(true);
@@ -103,6 +103,13 @@ export default function EditReceipt() {
       return total + item.price * item.quantity;
     }, 0);
   };
+  const handleQuantityChange = (index: number, newQty: number) => {
+    if (!receipt) return;
+    const updatedProducts = receipt.products.map((item, i) =>
+      i === index ? { ...item, quantity: newQty } : item
+    );
+    setReceipt({ ...receipt, products: updatedProducts });
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -128,12 +135,11 @@ export default function EditReceipt() {
                 product={product}
                 getProductImage={getProductImage}
                 onDelete={() => handleDeleteProduct(index)}
+                onQuantityChange={(newQty) =>
+                  handleQuantityChange(index, newQty)
+                }
               />
-
-              
             ))}
-
-            
           </div>
           <div className="mt-4">
             <div className="flex items-center justify-between py-4 text-md font-bold">

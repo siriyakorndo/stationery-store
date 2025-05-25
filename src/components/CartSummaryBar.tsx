@@ -1,11 +1,9 @@
 interface CartSummaryBarProps {
-  totalQuantity: number;
   totalPrice: number;
   onCreateOrder: () => void;
 }
 
 export default function CartSummaryBar({
-  totalQuantity,
   totalPrice,
   onCreateOrder,
 }: CartSummaryBarProps) {
@@ -14,9 +12,9 @@ export default function CartSummaryBar({
       <div className="mx-auto px-4 flex items-center justify-between grid grid-cols-4 gap-4">
         <div className="col-span-2 lg:col-span-3 bg-red-400 text-white flex items-center justify-between rounded-md p-4 text-sm md:text-md font-bold w-full">
           <div>
-            <span className="hidden sm:block text-red-500 bg-white p-3 mr-2 rounded-md">
+            {/* <span className="text-red-500 bg-white p-3 mr-2 rounded-md">
               {totalQuantity}
-            </span>
+            </span> */}
             <span>Total</span>
           </div>
 

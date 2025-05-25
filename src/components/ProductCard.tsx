@@ -10,6 +10,7 @@ interface ProductCardProps {
   count: number;
   onIncrement: (id: string) => void;
   onDecrement: (id: string) => void;
+  onChangeManual: (id: string, newValue: number) => void;
 }
 
 export default function ProductCard({
@@ -17,6 +18,7 @@ export default function ProductCard({
   count,
   onIncrement,
   onDecrement,
+  onChangeManual,
 }: ProductCardProps) {
   return (
     <div className="group relative bg-white p-6 rounded-md">
@@ -44,7 +46,19 @@ export default function ProductCard({
             >
               <MinusIcon className="w-4 h-4" />
             </button>
-            <span>{count}</span>
+            {/* <span>{count}</span> */}
+            <input
+              type="number"
+              min={0}
+              value={count}
+              onChange={(e) => {
+                const newValue = parseInt(e.target.value, 10);
+                if (!isNaN(newValue)) {
+                  onChangeManual(item.id, newValue);
+                }
+              }}
+              className="w-12 text-center border border-gray-300 rounded"
+            />
           </>
         )}
         <button

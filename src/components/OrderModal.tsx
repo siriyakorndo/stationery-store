@@ -16,7 +16,12 @@ interface OrderModalProps {
   errorMessage?: string;
   newData: Product[];
   handleAddProduct: () => void;
-  totalPrice:number;
+  totalPrice: number;
+  // setNewData: React.Dispatch<
+  //   React.SetStateAction<
+  //     { productName: string; price: number; quantity: number }[]
+  //   >
+  // >;
 }
 
 export default function OrderModal({
@@ -27,8 +32,19 @@ export default function OrderModal({
   errorMessage,
   newData,
   handleAddProduct,
-  totalPrice
+  totalPrice,
+  // setNewData,
 }: OrderModalProps) {
+  // function handleDelete(index: number) {
+  //   const updatedData = newData.filter((_, i) => i !== index);
+  //   setNewData(updatedData);
+  // }
+  // console.log(newData);
+  // const computedTotalPrice = newData.reduce(
+  //   (acc, product) => acc + product.price * product.quantity,
+  //   0
+  // );
+
   return (
     <Dialog open={open} onClose={() => {}} className="relative z-10">
       <div
@@ -83,19 +99,45 @@ export default function OrderModal({
               <div key={index} className="p-2 border-b border-gray-200">
                 <div className="grid grid-cols-4 gap-2 items-center text-sm">
                   <div className="col-span-2">
-                    <div className="font-medium">{product.productName}</div>
+                    <div className="font-medium">{product.productName} </div>
                     <div className="text-gray-500">{product.price} Baht/ea</div>
                   </div>
                   <div className="text-center">{product.quantity}</div>
+                  {/* <input
+                    type="number"
+                    min={1}
+                    value={product.quantity}
+                    onChange={(e) => {
+                      const newValue = parseInt(e.target.value, 10);
+                      if (!isNaN(newValue) && newValue > 0) {
+                        setNewData((prevData) =>
+                          prevData.map((p, i) =>
+                            i === index ? { ...p, quantity: newValue } : p
+                          )
+                        );
+                      }
+                    }}
+                    className="w-16 text-center border border-gray-300 rounded"
+                  /> */}
+
                   <div className="text-right">
-                    {product.price * product.quantity} Baht
+                    {product.price * product.quantity} ฺ
                   </div>
+                  {/* <div
+                    onClick={() => handleDelete(index)}
+                    className="ml-4 text-red-500 hover:text-red-700 font-bold"
+                    aria-label={`Delete ${product.productName}`}
+                  >
+                    Delete
+                  </div> */}
                 </div>
               </div>
             ))}
             <div className="flex justify-between w-full px-2 py-2">
               <div className="font-bold">Total Price</div>
-              <div className="text-right font-bold text-red-400">{totalPrice} Baht</div>
+              <div className="text-right font-bold text-red-400">
+                {totalPrice} Baht
+              </div>
             </div>
 
             <div className="flex justify-between space-x-2 mt-4 w-full">
@@ -107,8 +149,13 @@ export default function OrderModal({
               </button>
               <button
                 type="submit"
-                className="bg-blue-400 text-white flex items-center justify-center rounded-md p-3 text-sm font-medium w-1/2 hover:bg-blue-500"
-                disabled={!receiptId}
+                className={`flex items-center justify-center rounded-md p-3 text-sm font-medium w-1/2
+    ${
+      receiptId && newData.length > 0
+        ? "bg-blue-400 text-white hover:bg-blue-500"
+        : "bg-gray-300 text-gray-500 cursor-not-allowed"
+    }`}
+                disabled={!receiptId || newData.length == 0}
               >
                 Save Order
               </button>

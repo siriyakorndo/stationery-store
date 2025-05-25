@@ -86,7 +86,7 @@ export default function ShowAllReceipt() {
         ) : (
           <>
             <h2 className="text-xl font-bold mb-4 col-span-2">All Receipts</h2>
-            <div className="m-6 grid  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {receipts.map((receipt) => (
                 <div
                   key={receipt.id}
@@ -100,7 +100,7 @@ export default function ShowAllReceipt() {
                     </h2>
                   </div>
 
-                  <div className="flex space-x-2 mt-12 w-full">
+                  <div className="flex space-x-2 mt-10 w-full">
                     <button
                       className="flex-1 bg-white text-red-600 rounded-xl px-3 py-1 text-sm font-medium border border-transparent hover:bg-gray-100 flex items-center justify-center"
                       onClick={() => {

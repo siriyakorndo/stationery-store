@@ -31,6 +31,9 @@ export default function HomePage() {
   const [receiptId, setReceiptId] = useState("");
   const [showData, setShowData] = useState<Product[]>(data);
   const [errorMessage, setErrorMessage] = useState("");
+  const [newData, setNewData] = useState<
+  { productName: string; price: number; quantity: number }[]
+>([]);
   const categoryItems = [
     { key: "book", category: "Books", image: "/images/books.png" },
     {
@@ -88,6 +91,34 @@ export default function HomePage() {
       setShowData(data);
     }
   }, [data, filteredData.length, searchProductsByName]);
+  useEffect(() => {
+  const updatedNewData = data.reduce(
+    (acc, item) => {
+      const quantity = counts[item.id] || 0;
+      if (quantity > 0) {
+        acc.push({
+          productName: item.productName,
+          price: item.price,
+          quantity,
+        });
+      }
+      return acc;
+    },
+    [] as { productName: string; price: number; quantity: number }[]
+  );
+  setNewData(updatedNewData);
+
+}, [counts, data]);
+
+useEffect(() => {
+  setCounts(prevCounts => {
+    const newCounts: Record<string, number> = {};
+    data.forEach(item => {
+      newCounts[item.id] = prevCounts[item.id] || 0;
+    });
+    return newCounts;
+  });
+}, [data]);
 
   const handleDecrement = (id: string) => {
     setCounts((prevCounts) => {
@@ -109,6 +140,13 @@ export default function HomePage() {
     }));
   };
 
+  const onChangeManual = (id: string, newValue: number) => {
+    setCounts((prevCounts) => ({
+      ...prevCounts,
+      [id]: newValue,
+    }));
+  };
+
   if (!data) {
     return <div>Loading...</div>;
   }
@@ -125,20 +163,6 @@ export default function HomePage() {
       return total + (counts[item.id] || 0) * item.price;
     }, 0);
   };
-  const newData = data.reduce(
-    (acc: { productName: string; price: number; quantity: number }[], item) => {
-      const quantity = counts[item.id] || 0;
-      if (quantity > 0) {
-        acc.push({
-          productName: item.productName,
-          price: item.price,
-          quantity: quantity,
-        });
-      }
-      return acc;
-    },
-    []
-  );
 
   const handleAddProduct = async () => {
     try {
@@ -160,8 +184,8 @@ export default function HomePage() {
       }
       console.log("Product added successfully");
       setOpenModal(false);
-      setReceiptId("")
-      setErrorMessage("")
+      setReceiptId("");
+      setErrorMessage("");
       setCounts(() =>
         data.reduce((acc, item) => {
           acc[item.id] = 0;
@@ -178,7 +202,7 @@ export default function HomePage() {
       }
     }
   };
-  const totalQuantity = newData.reduce((sum, item) => sum + item.quantity, 0);
+  // const totalQuantity = newData.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <main className="flex min-h-screen w-full flex-col">
@@ -192,14 +216,14 @@ export default function HomePage() {
           <h2 className="text-2xl font-bold tracking-tight text-gray-900 mt-4 col-span-2">
             Select Category
           </h2>
-          <div className="relative flex-auto max-w-md">
+          <div className="col-span-3 md:col-span-1 relative flex-auto max-w-md">
             <input
               id="search"
               name="search"
               type="text"
               placeholder="Search products"
               onChange={(e) => setSearchProductsByName(e.target.value)}
-              className="block w-full max-w-md rounded-md border-0 py-1.5 pl-10 pr-20 text-gray-900 ring-1 ring-gray-300 placeholder:text-gray-400 sm:text-sm"
+              className="block w-full max-w-md rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-gray-300 placeholder:text-gray-400 sm:text-sm"
             />
             <svg
               className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
@@ -229,7 +253,7 @@ export default function HomePage() {
         <h2 className="text-2xl font-bold tracking-tight text-gray-900 mt-4 mb-4">
           What would you like to get today?
         </h2>
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-4 xl:gap-x-4">
+        <div className="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:gap-x-4">
           {showData.length > 0
             ? showData.map((item) => (
                 <ProductCard
@@ -238,13 +262,13 @@ export default function HomePage() {
                   count={counts[item.id] || 0}
                   onIncrement={handleIncrement}
                   onDecrement={handleDecrement}
+                  onChangeManual={onChangeManual}
                 />
               ))
             : "Not Found"}
         </div>
         {Object.keys(counts).length > 0 && (
           <CartSummaryBar
-            totalQuantity={totalQuantity}
             totalPrice={calculateTotalPrices()}
             onCreateOrder={() => setOpenModal(true)}
           />
@@ -258,6 +282,7 @@ export default function HomePage() {
           newData={newData}
           handleAddProduct={handleAddProduct}
           totalPrice={calculateTotalPrices()}
+          // setNewData={setNewData}
         />
       </div>
     </main>
