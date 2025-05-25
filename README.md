@@ -20,17 +20,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+### Stationery-store Web App – Built with Next.js
 
-To learn more about Next.js, take a look at the following resources:
+The project is **inspired by a technical test** I previously completed, but has since been **redesigned and refactored** to improve structure, user experience, and maintainability.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Check out the basic demo here: [`View Demo on Canva`](https://www.canva.com/design/DAGodcLL9DY/qIcTkEvH--NSC0p2HZb0vA/watch?utm_content=DAGodcLL9DY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha9e19832ad)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Images and icons used in this project are sourced from the following platforms under Free License:
 
-## Deploy on Vercel
+- [Pngtree](https://www.pngtree.com)
+- [Freepik](https://www.freepik.com)
+- [Flaticon](https://www.flaticon.com)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Please review their respective license terms before reuse.
