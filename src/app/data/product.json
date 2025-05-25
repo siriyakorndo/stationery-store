@@ -1,0 +1,107 @@
+[
+  {
+    "id": "thai_novel",
+    "productName": "Thai Novel",
+    "category": "book",
+    "image": "/images/books/thai_novel.png",
+    "price": 250
+  },
+  {
+    "id": "foreign_novel",
+    "productName": "Foreign Novel",
+    "category": "book",
+    "image": "/images/books/foreign_novel.png",
+    "price": 300
+  },
+  {
+    "id": "comic_book",
+    "productName": "Comic Book",
+    "category": "book",
+    "image": "/images/books/comic_book.png",
+    "price": 150
+  },
+  {
+    "id": "textbook",
+    "productName": "Textbook",
+    "category": "book",
+    "image": "/images/books/textbook.png",
+    "price": 350
+  },
+  {
+    "id": "cookbook",
+    "productName": "Cookbook",
+    "category": "book",
+    "image": "/images/books/cookbook.png",
+    "price": 280
+  },
+  {
+    "id": "notebook",
+    "productName": "Notebook",
+    "category": "stationery",
+    "image": "/images/stationery/notebook.png",
+    "price": 50
+  },
+  {
+    "id": "pen",
+    "productName": "Pen",
+    "category": "stationery",
+    "image": "/images/stationery/pen.png",
+    "price": 15
+  },
+  {
+    "id": "mechanical_pencil",
+    "productName": "Mechanical Pencil",
+    "category": "stationery",
+    "image": "/images/stationery/mechanical_pencil.png",
+    "price": 40
+  },
+  {
+    "id": "colored_pencils",
+    "productName": "Colored Pencils",
+    "category": "stationery",
+    "image": "/images/stationery/colored_pencils.png",
+    "price": 80
+  },
+  {
+    "id": "crayons",
+    "productName": "Crayons",
+    "category": "stationery",
+    "image": "/images/stationery/crayons.png",
+    "price": 60
+  },
+  {
+    "id": "watercolor_paint",
+    "productName": "Watercolor Paint",
+    "category": "stationery",
+    "image": "/images/stationery/watercolor_paint.png",
+    "price": 70
+  },
+  {
+    "id": "pencil_case",
+    "productName": "Pencil Case",
+    "category": "accessory",
+    "image": "/images/accessories/pencil_case.png",
+    "price": 100
+  },
+  {
+    "id": "decorative_sticker",
+    "productName": "Decorative Sticker",
+    "category": "accessory",
+    "image": "/images/accessories/decorative_sticker.png",
+    "price": 25
+  },
+  {
+    "id": "pencil_sharpener",
+    "productName": "Pencil Sharpener",
+    "category": "accessory",
+    "image": "/images/accessories/pencil_sharpener.png",
+    "price": 10
+  },
+  {
+    "id": "keychain",
+    "productName": "Keychain",
+    "category": "accessory",
+    "image": "/images/accessories/keychain.png",
+    "price": 30
+  }
+]
